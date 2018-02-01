@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Dialog</title>
+	<link rel="stylesheet" href="./dialog.css">
+</head>
+<body>
+	<div class="wrap">
+		<h1>Dialog</h1>
+
+		<button class="dialog_open" type="button">Layer</button>
+
+		<div aria-labelledby="dialog_title" class="dialog" role="dialog">
+			<div class="dialog__window" role="document" tabindex="0">
+				<header role="banner">
+					<h2 id="dialog_title">Dialog Title</h2>
+					<button aria-describedby="CloseDialog" class="dialog__close" type="button">Close</button>
+				</header>
+				<div>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				</div>
+			</div>
+			<div class="dialog__mask"></div>
+		</div>
+	</div>
+	<script src="./dialog.js"></script>
+</body>
+</html>
