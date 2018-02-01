@@ -3,23 +3,24 @@ html,body {height: 100%;}
 li {list-style: none;}
 .btn-slide-page {
 	position: fixed;
-	top: 20px;
-	left: 20px;
+	top: 50%;
+	right: 20px;
 	z-index: 1;
 }
-.btn-slide-page li {
-	float: left;
-}
-.btn-slide-page li ~ li {
-	padding-left: 5px;
-}
 .btn-slide-page li a {
-	padding: 5px 10px;
-	text-decoration: none;
-	background-color: rgba(35, 97, 92, .5);
-	color: #355a5c;
-	border-radius: 8px;
-	font-weight: bold;
+	display: block;
+    width: 20px;
+    height: 7px;
+    margin-right: 3px;
+    text-indent: -999px;
+    z-index: 999;
+    font-size: 1px;
+    color: transparent;
+    background: #fff;
+    border-radius: 5px;
+}
+.btn-slide-page li ~ li a {
+	margin-top: 15px;
 }
 .page-section {
 	position: relative;
