@@ -10,31 +10,24 @@
 	*/
 
 	let arr = [];
-	let doc = window.document;
 
-	const pageHeight = window.innerHeight; // window의 높이값
-	console.log(pageHeight); // 1014
+	const scrollBtn = document.querySelectorAll('section-link');
+	const scrollHeight = document.body.scrollTop || document.documentElement.scrollTop; // 스크롤 높이값
+	let pageHeight = window.innerHeight;
+	console.log(`scrollHeight = ${scrollHeight}`);
+	console.log(`scrollBtn = ${scrollBtn}`);
+	console.log(`pageHeight = ${pageHeight}`);
 
-	const pageButton = document.querySelectorAll("li");
-	let pageScrollTop = document.querySelector(".page-section").scrollTop; // 현재 top 값
-	console.log(`scrollTop값 : ${pageScrollTop}`); // 0
-	console.log(`버튼 인덱스값 : ${pageButton}`);
-
-	// li 의 인덱스 값 가져오기
-	for (let i = 1; i < pageButton.length; i++) {
-		// console.log(i); // 0, 1
-		pageScrollTop = arr.push(`${pageButton[i] * pageHeight}`);
-		console.log(`scrollTop값 : ${pageScrollTop}`);
-		console.log(`버튼 인덱스값 : ${pageButton[i]}`);
-
-		// pageButton[i].addEventListener("click", e => {
-		// 	if (i === 0) {
-		// 		console.log("a");
-		// 		arr.push('${offsetTop}');
-		// 	} else {
-		// 		console.log("b");
-		// 	}
-		// });
+	for (let i = 1; i <= scrollBtn.length; i++) {
+		const scrollWindow = document.querySelector('.page-section');
+		let topPos = scrollWindow.offsetTop;
+		console.log(`topPos = ${topPos}`);
+		scrollBtn[i].addEventListener('click', e => {
+			if (topPos === 0) {
+				console.log("a");
+			} else if (topPos === 1) {
+				console.log("b");
+			}
+		});
 	}
-	console.log(arr);
 }());
