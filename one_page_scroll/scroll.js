@@ -12,13 +12,10 @@
 	let arr = [];
 
 
-	function scrollIt (destination) {
-		const scrollHeight = document.body.scrollTop || document.documentElement.scrollTop; // 스크롤 높이값
-		const pageSection = document.querySelector('.page-section');
-		const pageHeight = window.innerHeight;
-		const pageOffset = window.pageYOffset;
-		const destinationOffset = typeof destination === 'number' ? destination : destination.offsetTop;
-		console.log(`destinationOffset = ${destinationOffset}`);
+	function scrollSet (scrollOffset) {
+		const pageOffset = scrollOffset.offsetTop;
+		const pageOffsetScroll = "";
+		console.log(`pageOffset = ${pageOffset}`);
 	}
 
 	function scroll (){
@@ -30,19 +27,19 @@
 			if (i === 0) {
 				scrollBtn[i].addEventListener('click', e => {
 					console.log("a");
-					scrollIt(document.querySelector('.page1'));
+					scrollSet(document.querySelector('.page1'));
 				});
 			}
 			else if (i === 1) {
 				scrollBtn[i].addEventListener('click', e => {
 					console.log("b");
-					scrollIt(document.querySelector('.page2'));
+					scrollSet(document.querySelector('.page2'));
 				});
 			}
 			else if (i === 2) {
 				scrollBtn[i].addEventListener('click', e => {
 					console.log("c");
-					scrollIt(document.querySelector('.page3'));
+					scrollSet(document.querySelector('.page3'));
 				});
 			}
 		}
