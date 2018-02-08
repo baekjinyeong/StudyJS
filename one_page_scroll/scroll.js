@@ -9,41 +9,41 @@
 	4. 가져온 index 값을 클릭하면 화면 Y값을 이동시켜준다. [0] 일 때 높이값, [1] 일 때 높이값
 	*/
 
-	let arr = [];
+	function scrollTo (scrollOffset) {
+		const scrollHeight = document.body.scrollTop || document.documentElement.scrollTop;
+		const pageOffsetTop = scrollOffset.offsetTop;
+		console.log(`scrollHeight = ${scrollHeight}`);
+		console.log(`pageOffsetTop = ${pageOffsetTop}`);
 
+		if(scrollHeight < pageOffsetTop) {
+			window.scrollTo(0, pageOffsetTop);
+			console.log("a");
 
-	function scrollSet (scrollOffset) {
-		const pageOffset = scrollOffset.offsetTop;
-		const pageOffsetScroll = "";
-		console.log(`pageOffset = ${pageOffset}`);
+		} else if (scrollHeight > pageOffsetTop) {
+			console.log("b");
+		}
+
 	}
 
-	function scroll (){
-		const scrollBtn = document.getElementsByTagName('li');
-		console.log(`scrollBtn = ${scrollBtn}`);
-		for (let i = 0; i < scrollBtn.length; i++) {
-			console.log(scrollBtn[i]);
-			
-			if (i === 0) {
-				scrollBtn[i].addEventListener('click', e => {
-					console.log("a");
-					scrollSet(document.querySelector('.page1'));
-				});
-			}
-			else if (i === 1) {
-				scrollBtn[i].addEventListener('click', e => {
-					console.log("b");
-					scrollSet(document.querySelector('.page2'));
-				});
-			}
-			else if (i === 2) {
-				scrollBtn[i].addEventListener('click', e => {
-					console.log("c");
-					scrollSet(document.querySelector('.page3'));
-				});
-			}
+	const scrollBtn = document.getElementsByTagName('li');
+	for (let i = 0; i < scrollBtn.length; i++) {
+		console.log(scrollBtn[i]);
+		
+		if (i === 0) {
+			scrollBtn[i].addEventListener('click', e => {
+				scrollTo(document.querySelector('.page1'));
+			});
+		}
+		else if (i === 1) {
+			scrollBtn[i].addEventListener('click', e => {
+				scrollTo(document.querySelector('.page2'));
+			});
+		}
+		else if (i === 2) {
+			scrollBtn[i].addEventListener('click', e => {
+				scrollTo(document.querySelector('.page3'));
+			});
 		}
 	}
-	scroll();
 }());
 
