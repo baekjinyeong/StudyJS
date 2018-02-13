@@ -15,14 +15,23 @@
 		console.log(`scrollHeight = ${scrollHeight}`);
 		console.log(`pageOffsetTop = ${pageOffsetTop}`);
 
-		if(scrollHeight < pageOffsetTop) {
-			window.scrollTo(0, pageOffsetTop);
-			console.log("a");
-
-		} else if (scrollHeight > pageOffsetTop) {
-			console.log("b");
+		function scrollIt () {
+			if (scrollHeight < pageOffsetTop) {
+				let page = scrollHeight;
+	
+				page += pageOffsetTop;
+				window.scrollTo(0, page);
+				console.log(page);
+	
+			} else if (scrollHeight > pageOffsetTop) {
+				let page = scrollHeight;
+	
+				page -= pageOffsetTop;
+				window.scrollTo(0, page);
+				console.log(page);
+			}
 		}
-
+		scrollIt();
 	}
 
 	const scrollBtn = document.getElementsByTagName('li');
