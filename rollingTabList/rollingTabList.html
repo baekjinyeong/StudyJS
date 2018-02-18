@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Rolling Tab List</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="warehousein_date">
+			<div class="calendar_tabs">
+				<div class="calendar_tabs_inner">
+					<!--
+						- ul.tabs_nav 태그에 width 값은 li 태그의 개수 * li 태그의 width
+						- 메뉴 활성화는 li 태그에 is_selected 클래스 추가하고, a 태그 안에 <span class="selected_date"></span> 추가
+						- 버튼 활성화는 span 태그에 is_active 클래스 추가
+					-->
+					<ul id="StorageNavTab" class="tabs_nav" style="width: 1440px;">
+						<li class="tabs_nav_item is_selected">
+							<a href="#">전체입고센터</a>
+						</li>
+						<!-- 날짜 선택 -->
+						<li class="tabs_nav_item">
+							<a href="#">1물류센터1층
+								<span class="selected_date">
+									<span class="alphanumeric">2017-10-04</span>(목) 오전</span>
+							</a>
+						</li>
+						<li class="tabs_nav_item">
+							<a href="#">1물류센터2층
+								<span class="selected_date">
+									<span class="alphanumeric">2017-10-04</span>(목) 오전</span>
+							</a>
+						</li>
+						<li class="tabs_nav_item">
+							<a href="#">2물류센터1층
+								<span class="selected_date">
+									<span class="alphanumeric">2017-10-04</span>(목) 오전</span>
+							</a>
+						</li>
+						<!-- //날짜 선택 -->
+						<!-- 디폴트 -->
+						<li class="tabs_nav_item">
+							<a href="#">2물류센터2층</a>
+						</li>
+						<li class="tabs_nav_item">
+							<a href="#">2물류센터3층</a>
+						</li>
+						<li class="tabs_nav_item">
+							<a href="#">3물류센터1층</a>
+						</li>
+						<li class="tabs_nav_item">
+							<a href="#">3물류센터2층</a>
+						</li>
+						<li class="tabs_nav_item">
+							<a href="#">3물류센터3층</a>
+						</li>
+						<!-- //디폴트 -->
+					</ul>
+				</div>
+				<span class="tabs_control tabs_prev">
+					<button type="button" class="button">
+						<span>이전</span>
+					</button>
+				</span>
+				<span class="tabs_control tabs_next is_active">
+					<button type="button" class="button">
+						<span>다음</span>
+					</button>
+				</span>
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="style.js"></script>
+</body>
+</html>
