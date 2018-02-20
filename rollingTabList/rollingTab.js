@@ -24,43 +24,41 @@
 	/*
 		- 버튼 활성화는 span 태그에 is_active 클래스 추가
 	*/
+
 	$(function(){
-		var width = $(".calendar_tabs_inner").width(),
-			slideNum = $(".tabs_nav_item").length, // li 태그의 개수
-			slideWidth = $(".tabs_nav_item").width(), // li 태그의 width
-			tabsWidth = (slideNum * (-slideWidth)); // ul.tabs_nav 태그의 width
-			console.log("calendar_tabs 넓이값 : "+width);
-			console.log("li 갯수 : "+slideNum);
-			console.log("li 넓이 : "+slideWidth);
+		var moveCount = 0, // 초기값
+			wrapWidth = $('.calendar_tabs_inner').width(), // 부모의 넓이
+			slideLength = $('.tabs_nav_item').length, // li의 길이
+			slideItemWidth = $('.tabs_nav_item').width(), // li의 넓이
+			tabsWidth = (slideLength * slideItemWidth); // li를 감싸는 ul의 넓이
+
+			console.log("calendar_tabs 넓이값 : "+wrapWidth);
+			console.log("li 갯수 : "+slideLength);
+			console.log("li 넓이 : "+slideItemWidth);
 			console.log("ul.tabs_nav 태그의 넓이 : "+tabsWidth);
-		
+
 		// 이전
-		$(".tabs_prev").on('click', function(e) {
-			e.preventDefault();
-			var moveLeft = parseInt($(".tabs_nav").css("margin-left"));
-			
-			if (moveLeft < 0) {
-				$(".tabs_nav").animate({"margin-left":"+=" + slideWidth + "px"},300);
-				$(".tabs_prev").addClass("is_active");
+		$('.tabs_prev').on('click', function(e){
+			var movePrev = (moveCount += slideItemWidth);
+
+			if(movePrev < tabsWidth){
+				$('.tabs_nav').animate({'margin-left': + movePrev + 'px'},300);
 			} else {
-				$(".tabs_prev").removeClass("is_active");
-				return;
+				console.log('첫번째입니다.');
 			}
-			console.log("왼쪽 : "+moveLeft);
+			console.log("초기값 : "+ movePrev);
 		});
 
 		// 다음
-		$(".tabs_next").on('click', function(e){
-			e.preventDefault();
-			var moveLeft = parseInt($(".tabs_nav").css("margin-left"));
-			
-			if( tabsWidth < moveLeft ) {
-				$(".tabs_nav").animate({"margin-left":"-=" + slideWidth + "px"},300);
+		$('.tabs_next').on('click', function(e){
+			var moveNext = (moveCount -= slideItemWidth);
+
+			if(wrapWidth < tabsWidth) {
+				$('.tabs_nav').animate({'margin-left': + moveNext + 'px'},300);
 			} else {
-				alert("마지막 입니다.");
-				$(".tabs_next").removeClass("is_active");
+				console.log('마지막입니다.');
 			}
-			console.log("오른쪽 : "+moveLeft);
+			console.log("초기값 : "+ moveNext);
 		});
 	});
 }());
