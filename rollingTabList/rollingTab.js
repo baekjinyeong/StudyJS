@@ -26,39 +26,55 @@
 	*/
 
 	$(function(){
-		var moveCount = 0, // 초기값
-			wrapWidth = $('.calendar_tabs_inner').width(), // 부모의 넓이
+		var defalutCount = 0, // 초기값
+			tabs = $('.calendar_tabs').width(),
 			slideLength = $('.tabs_nav_item').length, // li의 길이
-			slideItemWidth = $('.tabs_nav_item').width(), // li의 넓이
-			tabsWidth = (slideLength * slideItemWidth); // li를 감싸는 ul의 넓이
-
-			console.log("calendar_tabs 넓이값 : "+wrapWidth);
-			console.log("li 갯수 : "+slideLength);
-			console.log("li 넓이 : "+slideItemWidth);
-			console.log("ul.tabs_nav 태그의 넓이 : "+tabsWidth);
+			slideWidth = $('.tabs_nav_item').width(), // li의 넓이
+			tabsNum = Math.floor(tabs / slideWidth); // tab 갯수
 
 		// 이전
-		$('.tabs_prev').on('click', function(e){
-			var movePrev = (moveCount += slideItemWidth);
+		$('.tabs_prev').on('click', function(){
+			$('.tabs_next').addClass('is_active');
 
-			if(movePrev < tabsWidth){
-				$('.tabs_nav').animate({'margin-left': + movePrev + 'px'},300);
+			if(defalutCount > 0){
+				defalutCount--;
+				$('.tabs_prev').addClass('is_active');
+				$('.tabs_nav').stop().animate({'margin-left': + (defalutCount * (-slideWidth)) + 'px'},300);
+
+				if(defalutCount === 0) {
+					$('.tabs_prev').removeClass('is_active');
+				}
 			} else {
-				console.log('첫번째입니다.');
+				return false;
 			}
-			console.log("초기값 : "+ movePrev);
+			console.log(defalutCount, tabsNum-1);
 		});
 
 		// 다음
-		$('.tabs_next').on('click', function(e){
-			var moveNext = (moveCount -= slideItemWidth);
+		$('.tabs_next').on('click', function(){
+			$('.tabs_prev').addClass('is_active');
 
-			if(wrapWidth < tabsWidth) {
-				$('.tabs_nav').animate({'margin-left': + moveNext + 'px'},300);
+			if(defalutCount < tabsNum-1) {
+				defalutCount++;
+				$('.tabs_nav').stop().animate({'margin-left': + (defalutCount * (-slideWidth)) + 'px'},300);
+
+				if(defalutCount === (tabsNum-1)) {
+					$('.tabs_next').removeClass('is_active');
+				}
+
 			} else {
-				console.log('마지막입니다.');
+				return false;
 			}
-			console.log("초기값 : "+ moveNext);
+			console.log(defalutCount, tabsNum-1);
 		});
+		defaultActive();
+
+		function defaultActive(){
+			if(slideLength > tabsNum-1) {
+				$('.tabs_next').addClass('is_active');
+			} else {
+				$('.tabs_next').removeClass('is_active');
+			}
+		}
 	});
 }());
