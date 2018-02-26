@@ -19,15 +19,18 @@
 
 		// 클릭 이벤트
 		$(listBtn).on('click', function(e) {
-			event.preventDefault();
+			e.preventDefault();
 
 			var btnIdx = $(this).parent('li').index(),
-				offsetTop = $(listPage).eq(btnIdx).offset().top;
+				offsetTop = $(listPage).eq(btnIdx).offset().top,
+				target = $(e.target),
+				current = target.parent('li');
 
+			$(current).addClass('current').siblings().removeClass('current');
 			$('body, html').stop().animate({scrollTop: offsetTop},300);
-			console.log(btnIdx, offsetTop);
+
+			console.log(btnIdx);
 		});
 	};
-
 	scrolling();
 }());
