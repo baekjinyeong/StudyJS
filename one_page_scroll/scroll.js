@@ -14,7 +14,10 @@
 
 	function scrolling(){
 		var listBtn = $('.btn-slide-page').find('li').children('a'),
-			listPage = $('.page-list li');
+			listPage = $('.page-list li'),
+			wheelCount = 0,
+			wheel = 0,
+			height = listPage.height();
 
 
 		// 클릭 이벤트
@@ -28,9 +31,37 @@
 
 			$(current).addClass('current').siblings().removeClass('current');
 			$('body, html').stop().animate({scrollTop: offsetTop},300);
-
-			console.log(btnIdx);
 		});
+
+		// 마우스 휠 이벤트
+		$(window).on('mousewheel DOMMouseScroll', function(e){
+			e.preventDefault();
+			wheel = e.originalEvent.wheelDelta;
+
+			if(wheelCount >= 0) {
+				direction('down');
+				if(wheelCount > (listPage.length-1)) {
+					return false;
+				}
+			} else {
+				direction('up');
+				// if((-wheelCount) >= (-listPage.length-1)) {
+				// 	wheelCount = 0;
+				// }
+			}
+			console.log(wheelCount);
+		});
+
+		// 스크롤 이동방향
+		function direction(move){
+			if(move === 'down') {
+				wheelCount++;
+				$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 400);
+			} else if(move === 'up') {
+				wheelCount--;
+				$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 400);
+			}
+		};
 	};
 	scrolling();
 }());
