@@ -20,7 +20,7 @@
 	function scrolling(){
 		var listBtn = $('.btn-slide-page').find('li').children('a'),
 			listPage = $('.page-list li'),
-			wheelCount = 0,
+			dafalutCount = 0,
 			wheelDelta = 0,
 			height = $(window).height();
 
@@ -33,15 +33,18 @@
 				target = $(e.target),
 				current = target.parent('li');
 
+			dafalutCount = btnIdx;
+
 			$(current).addClass('current').siblings().removeClass('current');
 			$('body, html').stop().animate({scrollTop: offsetTop},300);
 		});
 
 		// 마우스 휠 이벤트
 		$(window).on('mousewheel DOMMouseScroll', function(e){
+
 			e.preventDefault();
 			wheelDelta = e.originalEvent.wheelDelta;
-			
+
 			if(wheelDelta < 0) {
 				direction('down');
 			} else {
@@ -53,32 +56,32 @@
 		// 스크롤 이동방향
 		function direction(move){
 			if(move === 'down') {
-				if(wheelCount < (listPage.length-1)) {
-					wheelCount++;
-					$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 500);
+				if(dafalutCount < (listPage.length-1 || dafalutCount < 0)) {
+					dafalutCount++;
+					$('body, html').stop().animate({scrollTop: (height * dafalutCount)}, 500);
 				}
 			} else if(move === 'up') {
-				if(wheelCount){
-					wheelCount--;
-					$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 500);
-				} else if(wheelCount === 0) {
-					wheelCount += 0;
+				if(dafalutCount){
+					dafalutCount--;
+					$('body, html').stop().animate({scrollTop: (height * dafalutCount)}, 500);
+				} else if(dafalutCount === 0) {
+					dafalutCount += 0;
 				}
 			}
 		};
 		
 		// 스크롤 시 버튼 current
 		function wheelCurrent(){
-			var wheelIdx = $(listPage).eq(wheelCount).index();
-			console.log(wheelCount, wheelIdx);
+			var wheelIdx = $(listPage).eq(dafalutCount).index();
+			console.log(dafalutCount, wheelIdx);
 
-			if(wheelIdx === 0 && wheelCount === 0) {
+			if(wheelIdx === 0 && dafalutCount === 0) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 1 && wheelCount === 1){
+			} else if(wheelIdx === 1 && dafalutCount === 1){
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 2 && wheelCount === 2){
+			} else if(wheelIdx === 2 && dafalutCount === 2){
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 3 && wheelCount === 3){
+			} else if(wheelIdx === 3 && dafalutCount === 3){
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
 			}
 		};
