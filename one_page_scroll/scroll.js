@@ -21,7 +21,6 @@
 		var listBtn = $('.btn-slide-page').find('li').children('a'),
 			listPage = $('.page-list li'),
 			dafalutCount = 0,
-			wheelDelta = 0,
 			height = $(window).height();
 
 		// 클릭 이벤트
@@ -43,13 +42,13 @@
 		$(window).on('mousewheel DOMMouseScroll', function(e){
 
 			e.preventDefault();
-			wheelDelta = e.originalEvent.wheelDelta;
 
-			if(wheelDelta < 0) {
+			if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0) {
 				direction('down');
 			} else {
 				direction('up');
 			}
+			console.log(e.originalEvent.wheelDelta);
 			wheelCurrent();
 		});
 
@@ -64,9 +63,7 @@
 				if(dafalutCount){
 					dafalutCount--;
 					$('body, html').stop().animate({scrollTop: (height * dafalutCount)}, 500);
-				} else if(dafalutCount === 0) {
-					dafalutCount += 0;
-				}
+				} 
 			}
 		};
 		
