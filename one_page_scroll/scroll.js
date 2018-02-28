@@ -78,6 +78,8 @@
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
 			} else if(wheelIdx === 2 && wheelCount === 2){
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
+			} else if(wheelIdx === 3 && wheelCount === 3){
+				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
 			}
 		};
 	};
