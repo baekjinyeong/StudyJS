@@ -16,9 +16,15 @@
 		var listBtn = $('.btn-slide-page').find('li').children('a'),
 			listPage = $('.page-list li'),
 			wheelCount = 0,
-			wheel = 0,
+			wheelDelta = 0,
+			wheelEvent = false,
 			height = listPage.height();
 
+
+		// 새로고침
+		$(document).ready(function(){
+			$('body, html').stop().animate({scrollTop: 0}, 200);
+		});
 
 		// 클릭 이벤트
 		$(listBtn).on('click', function(e) {
@@ -34,32 +40,33 @@
 		});
 
 		// 마우스 휠 이벤트
-		$(window).on('mousewheel DOMMouseScroll', function(e){
-			e.preventDefault();
-			wheel = e.originalEvent.wheelDelta;
-
-			if(wheelCount >= 0) {
-				direction('down');
-				if(wheelCount > (listPage.length-1)) {
-					return false;
+			$(window).on('mousewheel DOMMouseScroll', function(e){
+				e.preventDefault();
+				wheelDelta = e.originalEvent.wheelDelta;
+	
+				if(wheelDelta < 0) {
+					direction('down');
+				} else {
+					direction('up');
 				}
-			} else {
-				direction('up');
-				// if((-wheelCount) >= (-listPage.length-1)) {
-				// 	wheelCount = 0;
-				// }
-			}
-			console.log(wheelCount);
-		});
+				console.log(wheelDelta, wheelCount);
+				return false;
+			});
 
 		// 스크롤 이동방향
 		function direction(move){
 			if(move === 'down') {
-				wheelCount++;
-				$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 400);
+				if(wheelCount < (listPage.length-1)) {
+					wheelCount++;
+					$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 400);
+				}
 			} else if(move === 'up') {
-				wheelCount--;
-				$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 400);
+				if(wheelCount){
+					wheelCount--;
+					$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 400);
+				} else if(wheelCount === 0) {
+					wheelCount += 0;
+				}
 			}
 		};
 	};
