@@ -19,14 +19,14 @@ li {list-style: none;}
 .btn-slide-page li a:after {
 	display: inline-block;
 	content: "";
-	width: 23px;
+	width: 30px;
 	height: 3px;
 	background: #fff;
 	transition: all 0.3s ease;
 }
 .btn-slide-page li.current a:after,
 .btn-slide-page li:hover a:after{
-	width: 50px;
+	width: 55px;
 	background: #c40000;
 }
 .page-list {
