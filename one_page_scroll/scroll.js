@@ -50,7 +50,6 @@
 					direction('up');
 				}
 				console.log(wheelDelta, wheelCount);
-				return false;
 			});
 
 		// 스크롤 이동방향
