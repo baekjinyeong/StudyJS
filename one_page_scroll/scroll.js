@@ -12,19 +12,17 @@
 		5. animate로 페이지 이동 - scrollTop
 	*/
 
+	// 새로고침
+	$(document).ready(function(){
+		$('body, html').stop().animate({scrollTop: 0}, 200);
+	});
+
 	function scrolling(){
 		var listBtn = $('.btn-slide-page').find('li').children('a'),
 			listPage = $('.page-list li'),
 			wheelCount = 0,
 			wheelDelta = 0,
-			wheelEvent = false,
-			height = listPage.height();
-
-
-		// 새로고침
-		$(document).ready(function(){
-			$('body, html').stop().animate({scrollTop: 0}, 200);
-		});
+			height = $(window).height();
 
 		// 클릭 이벤트
 		$(listBtn).on('click', function(e) {
@@ -40,32 +38,46 @@
 		});
 
 		// 마우스 휠 이벤트
-			$(window).on('mousewheel DOMMouseScroll', function(e){
-				e.preventDefault();
-				wheelDelta = e.originalEvent.wheelDelta;
-	
-				if(wheelDelta < 0) {
-					direction('down');
-				} else {
-					direction('up');
-				}
-				console.log(wheelDelta, wheelCount);
-			});
+		$(window).on('mousewheel DOMMouseScroll', function(e){
+			e.preventDefault();
+			wheelDelta = e.originalEvent.wheelDelta;
+			
+			if(wheelDelta < 0) {
+				direction('down');
+			} else {
+				direction('up');
+			}
+			wheelCurrent();
+		});
 
 		// 스크롤 이동방향
 		function direction(move){
 			if(move === 'down') {
 				if(wheelCount < (listPage.length-1)) {
 					wheelCount++;
-					$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 400);
+					$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 500);
 				}
 			} else if(move === 'up') {
 				if(wheelCount){
 					wheelCount--;
-					$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 400);
+					$('body, html').stop().animate({scrollTop: (height * wheelCount)}, 500);
 				} else if(wheelCount === 0) {
 					wheelCount += 0;
 				}
+			}
+		};
+		
+		// 스크롤 시 버튼 current
+		function wheelCurrent(){
+			var wheelIdx = $(listPage).eq(wheelCount).index();
+			console.log(wheelCount, wheelIdx);
+
+			if(wheelIdx === 0 && wheelCount === 0) {
+				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
+			} else if(wheelIdx === 1 && wheelCount === 1){
+				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
+			} else if(wheelIdx === 2 && wheelCount === 2){
+				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
 			}
 		};
 	};
