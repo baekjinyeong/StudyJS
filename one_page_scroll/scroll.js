@@ -3,7 +3,6 @@
 	'use strict';
 	console.log('test');
 
-
 	/*
 		1. 클릭 이벤트 형성
 		2. 버튼 인덱스 값 구하기
@@ -12,8 +11,9 @@
 		5. animate로 페이지 이동 - scrollTop
 	*/
 
-	// 새로고침
-	$(document).ready(function(){
+	// 세팅
+	$(window).load(function(){
+		$('html').css('overflow','hidden');
 		$('body, html').stop().animate({scrollTop: 0}, 200);
 	});
 
@@ -40,7 +40,6 @@
 
 		// 마우스 휠 이벤트
 		$(window).on('mousewheel DOMMouseScroll', function(e){
-
 			e.preventDefault();
 
 			if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0) {
