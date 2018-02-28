@@ -48,7 +48,6 @@
 			} else {
 				direction('up');
 			}
-			console.log(e.originalEvent.wheelDelta);
 			wheelCurrent();
 		});
 
