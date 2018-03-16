@@ -41,6 +41,7 @@
 		// 마우스 휠 이벤트
 		$(window).on('mousewheel DOMMouseScroll', function(e){
 			e.preventDefault();
+			e.stopPropagation();
 
 			if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0) {
 				direction('down');
@@ -61,7 +62,7 @@
 				if(dafalutCount){
 					dafalutCount--;
 					$('body, html').stop().animate({scrollTop: (height * dafalutCount)}, 500);
-				} 
+				}
 			}
 		};
 		
