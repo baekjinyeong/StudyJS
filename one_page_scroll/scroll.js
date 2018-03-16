@@ -20,34 +20,64 @@
 			listPage = $('.page-item'),
 			listPageLength = listPage.length,
 			moveDerection = 'down',
-			listIdx = $('.page-item').index(),
-			listTop = $('.page-item').offset().top;
+			listIdx = $('.page-item').index();
+
+		// // 스크롤 이동
+		// var scrollMove = function(){
+		// 	for(var i = 0; i < listPageLength; i++) {
+		// 		var listTop = $('.page' + i);
+		// 		console.log(listTop);
+		// 	}
+
+		// 	if(moveDerection === 'down') {
+		// 		$(window).stop().animate({scrollTop : listTop.offset().top},300);
+
+		// 	} else if((moveDerection === 'up')){
+		// 		$(window).stop().animate({scrollTop : listTop.offset().top},300);
+		// 	}
+		// };
+
+		// // 버튼클릭 이벤트
+		// var scrollEvent = function(){
+		// 	$('.btn-slide-page li').on('click', function(){
+		// 		var btnIdx = $(this).index();
+		// 		if(listIdx < btnIdx ) {
+		// 			moveDerection = 'down';
+		// 		} else {
+		// 			moveDerection = 'up';
+		// 		}
+		// 		console.log(listIdx, btnIdx, moveDerection);
+		// 		scrollMove();
+		// 	});
+		// };
+		// scrollEvent();
 
 
-		// 스크롤 이동
-		var scrollMove = function(){
-			if(moveDerection === 'down') {
-				$(window).stop().animate({scrollTop : listIdx * listTop},300);
-
-			} else if((moveDerection === 'up')){
-				$(window).stop().animate({scrollTop : listIdx * listTop},300);
+		// div top 값 
+		var pageTop = function(){
+			// 각 페이지별 top 값을 구한다.
+			// 구한 top값을 버튼에 담아준다.
+			for (var i = 1; i <= listPage.length; i++) {
+				var posTop = $('.page' + i).offset().top;
+				console.log(posTop);
 			}
 		};
+		pageTop();
 
-		// 스크롤 이벤트
-		var scrollEvent = function(){
-			$('.btn-slide-page li').on('click', function(){
-				var btnIdx = $(this).index();
-				if(listIdx < btnIdx ) {
-					moveDerection = 'down';
-				} else {
-					moveDerection = 'up';
-				}
-				console.log(listIdx, btnIdx, moveDerection, listTop);
-			});
+		// 페이지 이동
+		var pageMove = function(){
+			// $(window).stop().animate({scrollTop : offset().top},400);
 		};
-		scrollEvent();
-		
+
+		// 버튼클릭 이벤트
+		$('.btn-slide-page li').on('click', function(){
+			// 버튼 인덱스를 구헤서 버튼을 클릭 시 해당 페이지 top값으로 이동한다. 
+			// 각 번호에 top 값을 넣어준다.
+			// 1번 클릭 시 1번 페이지의 top
+			// 2반 클릭 시 2번 페이지의 top
+			// 3번 클릭 시 3번 페이지의 top
+		});
+		pageMove();
 	};
 	scrolling();
 }());
