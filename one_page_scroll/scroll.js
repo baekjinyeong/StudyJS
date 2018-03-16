@@ -3,81 +3,84 @@
 	'use strict';
 	console.log('test');
 
-
 	/*
-		1. 각 div태그의 top 위치 값을 구한다.
-		2. down, up 방향 조건을 설정해준다.
-		3. page 클릭 이벤트를 형성한다.
-		4. 버튼 클릭 시 해당 버튼의 인덱스 값을 부여해준다.
-		5. 클릭 버튼의 인덱스 값에 div 태그의 top 값을 곱해준다. (animate 사용)
+		1. 클릭 이벤트 형성
+		2. 버튼 인덱스 값 구하기
+		3. 클릭된 버튼 인덱스에 해당하는 페이지인덱스구하기
+		4. 구한 페이지 인덱스별 top 값 찾기
+		5. animate로 페이지 이동 - scrollTop
 	*/
 
+	// 세팅
+	$(window).load(function(){
+		$('html').css('overflow','hidden');
+		$('body, html').stop().animate({scrollTop: 0}, 200);
+	});
+
 	function scrolling(){
-		var srollTop = $(window).scrollTop(),
-			windowHeight = $(window).height(),
-			listBtn = $('.btn-slide-page').find('li'),
-			listPageWrap = $('.wrap'),
-			listPage = $('.page-item'),
-			listPageLength = listPage.length,
-			moveDerection = 'down',
-			listIdx = $('.page-item').index();
+		var listBtn = $('.btn-slide-page').find('li').children('a'),
+			listPage = $('.page-list li'),
+			dafalutCount = 0,
+			height = $(window).height();
 
-		// // 스크롤 이동
-		// var scrollMove = function(){
-		// 	for(var i = 0; i < listPageLength; i++) {
-		// 		var listTop = $('.page' + i);
-		// 		console.log(listTop);
-		// 	}
+		// 클릭 이벤트
+		$(listBtn).on('click', function(e) {
+			e.preventDefault();
 
-		// 	if(moveDerection === 'down') {
-		// 		$(window).stop().animate({scrollTop : listTop.offset().top},300);
+			var btnIdx = $(this).parent('li').index(),
+				offsetTop = $(listPage).eq(btnIdx).offset().top,
+				target = $(e.target),
+				current = target.parent('li');
 
-		// 	} else if((moveDerection === 'up')){
-		// 		$(window).stop().animate({scrollTop : listTop.offset().top},300);
-		// 	}
-		// };
+			dafalutCount = btnIdx;
 
-		// // 버튼클릭 이벤트
-		// var scrollEvent = function(){
-		// 	$('.btn-slide-page li').on('click', function(){
-		// 		var btnIdx = $(this).index();
-		// 		if(listIdx < btnIdx ) {
-		// 			moveDerection = 'down';
-		// 		} else {
-		// 			moveDerection = 'up';
-		// 		}
-		// 		console.log(listIdx, btnIdx, moveDerection);
-		// 		scrollMove();
-		// 	});
-		// };
-		// scrollEvent();
+			$(current).addClass('current').siblings().removeClass('current');
+			$('body, html').stop().animate({scrollTop: offsetTop},300);
+		});
 
+		// 마우스 휠 이벤트
+		$(window).on('mousewheel DOMMouseScroll', function(e){
+			e.preventDefault();
+			e.stopPropagation();
 
-		// div top 값 
-		var pageTop = function(){
-			// 각 페이지별 top 값을 구한다.
-			// 구한 top값을 버튼에 담아준다.
-			for (var i = 1; i <= listPage.length; i++) {
-				var posTop = $('.page' + i).offset().top;
-				console.log(posTop);
+			if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0) {
+				direction('down');
+			} else {
+				direction('up');
+			}
+			wheelCurrent();
+		});
+
+		// 스크롤 이동방향
+		function direction(move){
+			if(move === 'down') {
+				if(dafalutCount < (listPage.length-1 || dafalutCount < 0)) {
+					dafalutCount++;
+					$('body, html').stop().animate({scrollTop: (height * dafalutCount)}, 500);
+				}
+			} else if(move === 'up') {
+				if(dafalutCount){
+					dafalutCount--;
+					$('body, html').stop().animate({scrollTop: (height * dafalutCount)}, 500);
+				}
 			}
 		};
-		pageTop();
+		
+		// 스크롤 시 버튼 current
+		function wheelCurrent(){
+			var wheelIdx = $(listPage).eq(dafalutCount).index();
+			console.log(dafalutCount, wheelIdx);
 
-		// 페이지 이동
-		var pageMove = function(){
-			// $(window).stop().animate({scrollTop : offset().top},400);
+			if(wheelIdx === 0 && dafalutCount === 0) {
+				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
+			} else if(wheelIdx === 1 && dafalutCount === 1){
+				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
+			} else if(wheelIdx === 2 && dafalutCount === 2){
+				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
+			} else if(wheelIdx === 3 && dafalutCount === 3){
+				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
+			}
 		};
-
-		// 버튼클릭 이벤트
-		$('.btn-slide-page li').on('click', function(){
-			// 버튼 인덱스를 구헤서 버튼을 클릭 시 해당 페이지 top값으로 이동한다. 
-			// 각 번호에 top 값을 넣어준다.
-			// 1번 클릭 시 1번 페이지의 top
-			// 2반 클릭 시 2번 페이지의 top
-			// 3번 클릭 시 3번 페이지의 top
-		});
-		pageMove();
 	};
 	scrolling();
 }());
