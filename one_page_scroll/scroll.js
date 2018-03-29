@@ -21,6 +21,7 @@
 		var listBtn = $('.btn-slide-page').find('li').children('a'),
 			listPage = $('.page-list li'),
 			dafalutCount = 0,
+			scrollEvent = false,  // 스크롤 한번씩만 적용시키기 위한 변수 선언
 			height = $(window).height();
 
 		// 클릭 이벤트
@@ -43,9 +44,10 @@
 			e.preventDefault();
 			e.stopPropagation();
 
-			if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0) {
+			if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0 && scrollEvent == false) {
 				direction('down');
-			} else {
+
+			} else if(e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0 && scrollEvent == false) {
 				direction('up');
 			}
 			wheelCurrent();
@@ -56,28 +58,37 @@
 			if(move === 'down') {
 				if(dafalutCount < (listPage.length-1 || dafalutCount < 0)) {
 					dafalutCount++;
-					$('body, html').stop().animate({scrollTop: (height * dafalutCount)}, 500);
+					scrollEvent = true;
+
+					$('body, html').stop().animate({scrollTop: (height * dafalutCount)},700,
+					function(){
+						scrollEvent = false;
+					});
 				}
 			} else if(move === 'up') {
 				if(dafalutCount){
 					dafalutCount--;
-					$('body, html').stop().animate({scrollTop: (height * dafalutCount)}, 500);
+					scrollEvent = true;
+
+					$('body, html').stop().animate({scrollTop: (height * dafalutCount)},700,
+					function(){
+						scrollEvent = false;
+					});
 				}
 			}
+			console.log(scrollEvent);
 		};
-		
 		// 스크롤 시 버튼 current
 		function wheelCurrent(){
 			var wheelIdx = $(listPage).eq(dafalutCount).index();
-			console.log(dafalutCount, wheelIdx);
 
 			if(wheelIdx === 0 && dafalutCount === 0) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 1 && dafalutCount === 1){
+			} else if(wheelIdx === 1 && dafalutCount === 1) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 2 && dafalutCount === 2){
+			} else if(wheelIdx === 2 && dafalutCount === 2) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 3 && dafalutCount === 3){
+			} else if(wheelIdx === 3 && dafalutCount === 3) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
 			}
 		};
