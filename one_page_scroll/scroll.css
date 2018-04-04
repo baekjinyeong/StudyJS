@@ -3,11 +3,13 @@ html,body {height: 100%;}
 li {list-style: none;}
 .btn-slide-page {
 	position: fixed;
+	margin-top: -34px;
 	top: 50%;
 	right: 30px;
 	z-index: 1;
 }
 .btn-slide-page li {
+	height: 17px;
 	text-align: right;
 }
 .btn-slide-page li a {
