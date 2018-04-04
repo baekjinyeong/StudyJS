@@ -3,7 +3,7 @@ html,body {height: 100%;}
 li {list-style: none;}
 .btn-slide-page {
 	position: fixed;
-	margin-top: -34px;
+	margin-top: -40px;
 	top: 50%;
 	right: 30px;
 	z-index: 1;
