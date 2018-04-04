@@ -68,7 +68,7 @@
 					});
 				}
 			} else if(move === 'up') {
-				if(defalutCount && scrollEvent === 0){
+				if(scrollEvent === 0 && defalutCount){
 					scrollEvent = 1;
 					defalutCount--;
 					
