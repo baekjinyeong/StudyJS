@@ -58,7 +58,7 @@
 		// 스크롤 이동방향
 		function direction(move){
 			if(move === 'down') {
-				if(defalutCount < (scrollEvent === 0 && listPage.length-1 || defalutCount <= 0)) {
+				if(scrollEvent === 0 && defalutCount < (listPage.length-1 || defalutCount <= 0)) {
 					scrollEvent = 1;
 					defalutCount++;
 					
