@@ -20,8 +20,8 @@
 	function scrolling(){
 		var listBtn = $('.btn-slide-page').find('li').children('a'),
 			listPage = $('.page-list li'),
-			dafalutCount = 0,
-			scrollEvent = false,  // 스크롤 한번씩만 적용시키기 위한 변수 선언
+			defalutCount = 0,
+			scrollEvent = 0, // 스크롤 한번씩만 적용시키기 위한 변수 선언
 			height = $(window).height();
 
 		// 클릭 이벤트
@@ -33,21 +33,24 @@
 				target = $(e.target),
 				current = target.parent('li');
 
-			dafalutCount = btnIdx;
+			defalutCount = btnIdx;
 
 			$(current).addClass('current').siblings().removeClass('current');
-			$('body, html').stop().animate({scrollTop: offsetTop},300);
+			$('body, html').stop().animate({scrollTop: offsetTop},700);
 		});
 
 		// 마우스 휠 이벤트
-		$(window).on('mousewheel DOMMouseScroll', function(e){
-			e.preventDefault();
-			e.stopPropagation();
+		$(window).on('mousewheel DOMMouseScroll', function(c){
+			
+			var wheelDelta = c.originalEvent.wheelDelta,
+				wheelDetail = c.originalEvent.detail;
 
-			if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0 && scrollEvent == false) {
+			if(wheelDelta <= 0 || wheelDetail > 0) {
+				c.preventDefault();
 				direction('down');
 
-			} else if(e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0 && scrollEvent == false) {
+			} else if(wheelDelta > 0 || wheelDetail < 0) {
+				c.preventDefault();
 				direction('up');
 			}
 			wheelCurrent();
@@ -56,39 +59,41 @@
 		// 스크롤 이동방향
 		function direction(move){
 			if(move === 'down') {
-				if(dafalutCount < (listPage.length-1 || dafalutCount < 0)) {
-					dafalutCount++;
-					scrollEvent = true;
-
-					$('body, html').stop().animate({scrollTop: (height * dafalutCount)},700,
+				console.log(defalutCount);
+				if(defalutCount < (scrollEvent === 0 && listPage.length-1 || defalutCount <= 0)) {
+					scrollEvent = 1;
+					defalutCount++;
+					
+					$('body, html').stop().animate({scrollTop: height * defalutCount},700,
 					function(){
-						scrollEvent = false;
+						scrollEvent = 0;
 					});
 				}
+				setTimeout(scrollEvent);
 			} else if(move === 'up') {
-				if(dafalutCount){
-					dafalutCount--;
-					scrollEvent = true;
-
-					$('body, html').stop().animate({scrollTop: (height * dafalutCount)},700,
+				if(defalutCount && scrollEvent === 0){
+					scrollEvent = 1;
+					defalutCount--;
+					
+					$('body, html').stop().animate({scrollTop: height * defalutCount},700,
 					function(){
-						scrollEvent = false;
+						scrollEvent = 0;
 					});
 				}
 			}
-			console.log(scrollEvent);
 		};
+
 		// 스크롤 시 버튼 current
 		function wheelCurrent(){
-			var wheelIdx = $(listPage).eq(dafalutCount).index();
+			var wheelIdx = $(listPage).eq(defalutCount).index();
 
-			if(wheelIdx === 0 && dafalutCount === 0) {
+			if(wheelIdx === 0 && defalutCount === 0) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 1 && dafalutCount === 1) {
+			} else if(wheelIdx === 1 && defalutCount === 1) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 2 && dafalutCount === 2) {
+			} else if(wheelIdx === 2 && defalutCount === 2) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
-			} else if(wheelIdx === 3 && dafalutCount === 3) {
+			} else if(wheelIdx === 3 && defalutCount === 3) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
 			}
 		};
