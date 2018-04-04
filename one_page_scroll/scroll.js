@@ -41,16 +41,15 @@
 
 		// 마우스 휠 이벤트
 		$(window).on('mousewheel DOMMouseScroll', function(c){
-			
+			c.preventDefault();
+
 			var wheelDelta = c.originalEvent.wheelDelta,
 				wheelDetail = c.originalEvent.detail;
 
 			if(wheelDelta <= 0 || wheelDetail > 0) {
-				c.preventDefault();
 				direction('down');
 
 			} else if(wheelDelta > 0 || wheelDetail < 0) {
-				c.preventDefault();
 				direction('up');
 			}
 			wheelCurrent();
@@ -59,7 +58,6 @@
 		// 스크롤 이동방향
 		function direction(move){
 			if(move === 'down') {
-				console.log(defalutCount);
 				if(defalutCount < (scrollEvent === 0 && listPage.length-1 || defalutCount <= 0)) {
 					scrollEvent = 1;
 					defalutCount++;

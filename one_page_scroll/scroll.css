@@ -20,14 +20,13 @@ li {list-style: none;}
 	display: inline-block;
 	content: "";
 	width: 30px;
-	height: 3px;
+	height: 4px;
 	background: #fff;
 	transition: all 0.3s ease;
 }
 .btn-slide-page li.current a:after,
 .btn-slide-page li:hover a:after{
-	width: 55px;
-	background: #c40000;
+	width: 60px;
 }
 .page-list {
 	width: 100%;
@@ -40,6 +39,18 @@ li {list-style: none;}
 	background: #000;
 	color: #fff;
 	text-align: right;
+}
+.page-item:first-child {
+	background: #4c657b;
+}
+.page-item:nth-child(2) {
+	background: #843838;
+}
+.page-item:nth-child(3) {
+	background: #475b39;
+}
+.page-item:last-child {
+	background: #5e5e7e;
 }
 h1 {
 	position: absolute;
