@@ -67,7 +67,6 @@
 						scrollEvent = 0;
 					});
 				}
-				setTimeout(scrollEvent);
 			} else if(move === 'up') {
 				if(defalutCount && scrollEvent === 0){
 					scrollEvent = 1;
