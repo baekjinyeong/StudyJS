@@ -40,11 +40,11 @@
 		});
 
 		// 마우스 휠 이벤트
-		$(window).on('mousewheel DOMMouseScroll', function(c){
-			c.preventDefault();
+		$(window).on('mousewheel DOMMouseScroll', function(e){
+			e.preventDefault();
 
-			var wheelDelta = c.originalEvent.wheelDelta,
-				wheelDetail = c.originalEvent.detail;
+			var wheelDelta = e.originalEvent.wheelDelta,
+				wheelDetail = e.originalEvent.detail;
 
 			if(wheelDelta <= 0 || wheelDetail > 0) {
 				direction('down');
@@ -56,7 +56,7 @@
 		});
 
 		// 스크롤 이동방향
-		function direction(move){
+		function direction(move) {
 			if(move === 'down') {
 				if(scrollEvent === 0 && defalutCount < (listPage.length-1 || defalutCount <= 0)) {
 					scrollEvent = 1;
@@ -83,6 +83,7 @@
 		// 스크롤 시 버튼 current
 		function wheelCurrent(){
 			var wheelIdx = $(listPage).eq(defalutCount).index();
+			console.log(wheelIdx);
 
 			if(wheelIdx === 0 && defalutCount === 0) {
 				$(listBtn).parent('li').eq(wheelIdx).addClass('current').siblings().removeClass('current');
