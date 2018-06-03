@@ -12,14 +12,12 @@
 	
 	var doc = window.document,
 		target = document.getElementsByClassName(".lottoWrap"),
-		eleArr = [];
+		arr = [];
 
 	function lotto(){
 		var lottoArray = [], // 1 ~ 45 번호를 저장
-			arr = [], // 생성 번호 저장
-			randomNum = 0, // 1 ~ 45 중 랜덤으로 번호 추출
+			numberIdx = 0, // 생성된 번호
 			count = 0, // 추첨된 로또 번호 갯수
-			checkNum = false, // 로또 번호 중복 확인
 			button = document.querySelector('.button'),
 			print = document.querySelector('.lottoWrap');
 
@@ -27,12 +25,12 @@
 
 		// 1 ~ 45 번호 담기
 		for (var i = 1; i <= 45; i++) {
-			lottoArray[i - 1] = i;
+			lottoArray.push(i);
 		};
 		console.log(lottoArray);
 
 		// 랜덤 번호 섞기
-
+		
 		// 랜덤 번호 생성하기
 		arr.push("<table>");
 
@@ -40,15 +38,15 @@
 			count++;
 			if (count <= 6) {
 				for (var i = 0; i <= 6; i++) {
-					arr[i];
 					for (var k = 0; k <= i; k++) {
-						randomNum = parseInt(Math.random() * 45 + 1);
+						numberIdx = parseInt(Math.random() * lottoArray.length);
 					}
 				}
-				arr.push("<td>" + randomNum + "</td>");
+				arr.push("<td>" + lottoArray[numberIdx] + "</td>");
 			} else {
+				return false;
 			}
-			console.log(arr);
+			console.log(lottoArray[numberIdx]);
 			print.innerHTML = arr.join('');
 		});
 	};
