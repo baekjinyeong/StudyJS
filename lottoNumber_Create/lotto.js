@@ -11,7 +11,6 @@
 	*/
 	
 	var doc = window.document,
-		target = document.getElementsByClassName(".lottoWrap"),
 		arr = [];
 
 	function lotto(){
@@ -37,14 +36,18 @@
 		button.addEventListener("click", function(){
 			count++;
 			if (count <= 6) {
+				// 랜덤번호 생성
 				for (var i = 0; i <= 6; i++) {
 					for (var k = 0; k <= i; k++) {
 						numberIdx = parseInt(Math.random() * lottoArray.length);
+						/* 전에 뽑았던 배열과 지금 뽑은 배열의 값을 비교하여 두 수가 같다면 배열수를 1감소시켜 다시 그 배열부터 채우게 한다.*/
 					}
 				}
 				arr.push("<td>" + lottoArray[numberIdx] + "</td>");
+				
 			} else {
-				return false;
+				arr.push("<tr>");
+				count = 0;
 			}
 			console.log(lottoArray[numberIdx]);
 			print.innerHTML = arr.join('');
