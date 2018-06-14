@@ -11,13 +11,14 @@
 	*/
 	
 	var doc = window.document,
-		arr = [];
+			arr = [];
 
 	function lotto(){
 		var lottoArray = [], // 1 ~ 45 번호를 저장
 			numberIdx = 1, // 생성된 번호
 			numberArray = [], // 생성된 번호를 저장
 			count = 0, // 추첨된 로또 번호 갯수
+			all = [], // 모든 로또번호 담기
 			button = document.querySelector('.button'),
 			print = document.querySelector('.lottoWrap');
 
@@ -28,13 +29,13 @@
 			lottoArray.push(i);
 		};
 		// console.log(lottoArray);
-
-		// 랜덤 번호 섞기
 		
 		// 랜덤 번호 생성하기
 		arr.push("<table>");
 
 		button.addEventListener("click", function(){
+			// allNum();
+
 			count++;
 			if (count <= 6) {
 				// 랜덤번호 생성
@@ -42,19 +43,28 @@
 					for (var k = 0; k <= i; k++) {
 						numberIdx = parseInt((Math.random() * lottoArray.length) + 1);
 					}
+					if(numberArray[i] == 6) {
+						break;
+					}
 				}
 				overlapNum();
 			} else {
 				arr.push("<tr>");
-				numberArray = [];
 				count = 0;
+				allNum();
 			}
-			console.log(numberArray,numberArray.slice(-1)[0]);
+			console.log(numberArray);
 			print.innerHTML = arr.join('');
 		});
 
+			// 가장 많이 나온 수 찾기
+			function allNum(){
+				if(numberArray.length === 6) {
+					all.push(numberArray);
+				}
+			};
 
-		/* 중복확인 - 마지막 배열값과 이전 배열값을 비교 후 동일하면 다시 뽑는다. */
+		// 중복확인 - 마지막 배열값과 이전 배열값을 비교 후 동일하면 다시 뽑는다.
 		function overlapNum(){
 			if(numberArray.slice(-1)[0] !== numberArray) {
 				numberArray.push(numberIdx);
