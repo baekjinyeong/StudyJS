@@ -10,15 +10,12 @@
 		6. 이 떄 뽑힌 번호는 중복되지 않아야 한다.
 	*/
 	
-	var doc = window.document,
-		arr = [],
-		lottoArray, // 1 ~ 45 번호를 저장
-		numberIdx = 0, // 생성된 번호
-		numberArray = [], // 생성된 번호를 저장
-		allNumber = [],
-		count,
-		result = 0,
-		overl = true;
+	var arr = [],
+			lottoArray, // 1 ~ 45 번호를 저장
+			numberIdx = 0, // 생성된 번호
+			numberArray = [], // 생성된 번호를 저장
+			count,
+			overlap = true;
 
 	// 1~ 45 번호 저장
 	function saveNumber(){
@@ -41,28 +38,24 @@
 				saveNumber();
 			}
 		}
-		console.log(numberArray,count,overl);
 	};
 	
 
 	// 중복값 찾기
 	function overlapNum(){
-		for (var i = 0; i < count; i++) { // 1부터 i까지 반복하여 중복확인
-			if (numberArray[i] == numberIdx) { // 중복된 번호가 아니면 넘어가기.
-				overl = false;
-			}
+		if (numberArray.slice(-1)[0] == numberIdx) { // 번호를 담고있는 배열의 마지막 숫자가 새로뽑은 랜덤 숫자와 같으면 overlap = false;
+			overlap = false;
 		}
-
-		if (overl) { //중복 없을 시 count 1 증가
+		console.log(numberArray.slice(-1)[0],overlap);
+		
+		if (overlap) { //중복 없을 시 overlap = true 일 경우 번호 생성
 			numberArray.push(numberIdx);
-			numberArray[count] = numberIdx; //추출된 번호를 배열에 넣기
 			arr.push("<td>" + numberIdx + "</td>");
 			count++;
 		}
-		overl = true; //원래 true으로 돌아가기
-		
-		
+		overlap = true;
 	}
+	
 
 	// 가장많이 나온 수
 	function frequent(arr) {
@@ -80,9 +73,9 @@
 	// 화면출력
 	function screenPrint(){
 		var button = document.querySelector('.button'),
-			buttonFrequent = document.querySelector('.buttonfrequent'),
-			print = document.querySelector('.lottoWrap'),
-			print2 = document.querySelector('.lottofrequent');
+				buttonFrequent = document.querySelector('.buttonfrequent'),
+				print = document.querySelector('.lottoWrap'),
+				print2 = document.querySelector('.lottofrequent');
 
 		arr.push("<table>");
 
