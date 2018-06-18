@@ -11,18 +11,20 @@
 	*/
 	
 	var doc = window.document,
-			arr = [],
-
-			lottoArray = [], // 1 ~ 45 번호를 저장
-			numberIdx = 1, // 생성된 번호
-			numberArray = [], // 생성된 번호를 저장
-			count = 0, // 추첨된 로또 번호 갯수
-			all = [], // 모든 로또번호 담기
-			button = document.querySelector('.button'),
-			print = document.querySelector('.lottoWrap');
+		arr = [],
+		lottoArray, // 1 ~ 45 번호를 저장
+		numberIdx = 0, // 생성된 번호
+		numberArray = [], // 생성된 번호를 저장
+		allNumber = [],
+		count,
+		result = 0,
+		overl = true;
 
 	// 1~ 45 번호 저장
 	function saveNumber(){
+		lottoArray = [];
+		count = 0;
+
 		for (var i = 1; i <= 45; i++) {
 			lottoArray.push(i);
 		};
@@ -32,29 +34,67 @@
 	// 랜덤번호 생성
 	function createNumber(){
 		numberIdx = parseInt((Math.random() * lottoArray.length) + 1);
-
-		count++;
-		if (count <= 6) {
-			numberArray.push(numberIdx);
-			arr.push("<td>" + numberIdx + "</td>");
+		if (count < 6) {
+			overlapNum()
+			if(count === 6) {
+				arr.push("<tr>");
+				saveNumber();
+			}
 		}
-		
-		if (count === 6) {
-			arr.push("<tr>");
-			count = 0;
-		}
-		console.log(numberArray, count);
+		console.log(numberArray,count,overl);
 	};
+	
 
 	// 중복값 찾기
+	function overlapNum(){
+		for (var i = 0; i < count; i++) { // 1부터 i까지 반복하여 중복확인
+			if (numberArray[i] == numberIdx) { // 중복된 번호가 아니면 넘어가기.
+				overl = false;
+			}
+		}
+
+		if (overl) { //중복 없을 시 count 1 증가
+			numberArray.push(numberIdx);
+			numberArray[count] = numberIdx; //추출된 번호를 배열에 넣기
+			arr.push("<td>" + numberIdx + "</td>");
+			count++;
+		}
+		overl = true; //원래 true으로 돌아가기
+		
+		
+	}
+
+	// 가장많이 나온 수
+	function frequent(arr) {
+		return arr.sort(function (a, b) {
+			return arr.filter(function (v) {
+				return v === a;
+			}).length - arr.filter(function (v) {
+				return v === b;
+			}).length;
+		}).pop();
+	}
+	
+	
 
 	// 화면출력
 	function screenPrint(){
+		var button = document.querySelector('.button'),
+			buttonFrequent = document.querySelector('.buttonfrequent'),
+			print = document.querySelector('.lottoWrap'),
+			print2 = document.querySelector('.lottofrequent');
+
 		arr.push("<table>");
 
+		// 번호뽑기
 		button.addEventListener("click", function(){
 			createNumber();
 			print.innerHTML = arr.join('');
+		});
+
+		// 가장많이 나온 수
+		buttonFrequent.addEventListener("click", function(){
+			print2.innerHTML = frequent(numberArray);
 		});
 	};
 
