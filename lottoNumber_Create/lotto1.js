@@ -56,6 +56,7 @@
 			count++;
 		}
 		overlap = true;
+		console.log(numberArray);
 	}
 
 	// 화면출력
