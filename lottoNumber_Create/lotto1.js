@@ -44,7 +44,7 @@
 	// 중복값 찾기
 	function overlapNum(){
 		for(var i = 0;i <= 6; i++) {
-			if (numberArray[i] == numberIdx) { // 6번 돌면서 담기는 numberArray[i] 안의 숫자와 numberIdx 의 값이 같으면 false 
+			if (numberArray[i] == numberIdx) { // 6번 돌면서 1~6번째 숫자와 numberIdx 의 값이 같으면 false 
 				overlap = false;
 				console.log(numberArray[i],overlap,numberIdx);
 			}
