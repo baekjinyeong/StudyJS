@@ -13,13 +13,14 @@
 	var arr = [],
 			lottoArray, // 1 ~ 45 번호를 저장
 			numberIdx = 0, // 생성된 번호
-			numberArray = [], // 생성된 번호를 저장
+			numberArray, // 생성된 번호를 저장
 			count,
 			overlap = true;
 
 	// 1~ 45 번호 저장
 	function saveNumber(){
 		lottoArray = [];
+		numberArray = [];
 		count = 0;
 
 		for (var i = 1; i <= 45; i++) {
@@ -40,13 +41,13 @@
 		}
 	};
 	
-
 	// 중복값 찾기
 	function overlapNum(){
-		if (numberArray.slice(-1)[0] == numberIdx) { // 번호를 담고있는 배열의 마지막 숫자가 새로뽑은 랜덤 숫자와 같으면 overlap = false;
+		// 번호를 담고있는 배열안의 값과 같거나 배열안의 마지막 숫자가 새로뽑은 랜덤 숫자와 같으면 overlap = false;
+		if (numberArray == numberIdx || numberArray.slice(-1)[0] == numberIdx) { 
 			overlap = false;
 		}
-		console.log(numberArray.slice(-1)[0],overlap);
+		console.log(numberArray.slice(-1)[0],overlap,numberArray);
 		
 		if (overlap) { //중복 없을 시 overlap = true 일 경우 번호 생성
 			numberArray.push(numberIdx);
@@ -55,27 +56,11 @@
 		}
 		overlap = true;
 	}
-	
-
-	// 가장많이 나온 수
-	function frequent(arr) {
-		return arr.sort(function (a, b) {
-			return arr.filter(function (v) {
-				return v === a;
-			}).length - arr.filter(function (v) {
-				return v === b;
-			}).length;
-		}).pop();
-	}
-	
-	
 
 	// 화면출력
 	function screenPrint(){
 		var button = document.querySelector('.button'),
-				buttonFrequent = document.querySelector('.buttonfrequent'),
-				print = document.querySelector('.lottoWrap'),
-				print2 = document.querySelector('.lottofrequent');
+				print = document.querySelector('.lottoWrap');
 
 		arr.push("<table>");
 
@@ -83,11 +68,6 @@
 		button.addEventListener("click", function(){
 			createNumber();
 			print.innerHTML = arr.join('');
-		});
-
-		// 가장많이 나온 수
-		buttonFrequent.addEventListener("click", function(){
-			print2.innerHTML = frequent(numberArray);
 		});
 	};
 
