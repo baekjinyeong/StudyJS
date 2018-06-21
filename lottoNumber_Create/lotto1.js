@@ -43,11 +43,12 @@
 	
 	// 중복값 찾기
 	function overlapNum(){
-		// 번호를 담고있는 배열안의 값과 같거나 배열안의 마지막 숫자가 새로뽑은 랜덤 숫자와 같으면 overlap = false;
-		if (numberArray == numberIdx || numberArray.slice(-1)[0] == numberIdx) { 
-			overlap = false;
+		for(var i = 0;i <= 6; i++) {
+			if (numberArray[i] == numberIdx) { // 6번 돌면서 담기는 numberArray[i] 안의 숫자와 numberIdx 의 값이 같으면 false 
+				overlap = false;
+				console.log(numberArray[i],overlap,numberIdx);
+			}
 		}
-		console.log(numberArray.slice(-1)[0],overlap,numberArray);
 		
 		if (overlap) { //중복 없을 시 overlap = true 일 경우 번호 생성
 			numberArray.push(numberIdx);
