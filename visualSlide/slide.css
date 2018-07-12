@@ -12,37 +12,64 @@ a:active,a:link,a:visited{color:#666;text-decoration:none}
 a:hover{color:#666;cursor:pointer}
 label{cursor:pointer}
 img,input,label{vertical-align:top;*vertical-align:middle}
-button{cursor:pointer;background:0 0;display:inline-block;margin:0 -5px;border:0;vertical-align:top;*vertical-align:-1px;overflow:visible}
+button{cursor:pointer;background:0 0;display:inline-block;border:0;overflow:visible}
 button::-moz-focus-inner{border:0;padding:0}
-button *{position:relative}
 
 .dialog-guide {
 	width: 978px;
 	border: 1px solid #000;
 	background-color: #f8f8f8;
+	font-family: '맑은고딕', Malgun Gothic, '돋움', dotum, arial, sans-serif;
 }
 .guide-slide-wrap {
 	position: relative;
-	margin: 35px 20px 20px;
+	margin: 35px 20px 18px;
 }
 .guide-slide-block {
-	width: 848px;
+	width: 850px;
 	margin: 0 auto;
 	overflow: hidden;
 }
 .guide-slide-list {
-	width: 3392px;
+	width: 3400px;
+}
+.guide-slide-list:after {
+	display: block;
+	content: "";
+	clear: both;
 }
 .guide-slide-item {
 	float: left;
-	width: 846px;
-	height: 397px;
-	border: 1px solid #ccc;
-	background-color: #fff; 
+	width: 850px;
+	text-align: center;
+}
+.guide-title {
+	margin-bottom: 11px;
+	font-size: 21px;
+}
+.guide-text {
+	color: #666;
+	font-size: 13px;
+	line-height: 21px;
+}
+.guide-image {
+	display: inline-block;
+}
+.guide-image1 {
+	margin-top: 35px;
+}
+.guide-image2 {
+	margin-top: 77px;
+}
+.guide-image3 {
+	margin-top: 55px;
+}
+.guide-image4 {
+	margin-top: 26px;
 }
 .btn-slider {
 	position: absolute;
-	margin-top: -25px;
+	margin-top: 27px;
 	top: 50%;
 	width: 27px;
 	height: 54px;
@@ -52,4 +79,42 @@ button *{position:relative}
 }
 .btn-slider-next {
 	right: 0;
+}
+.index-list {
+	margin-top: 20px;
+}
+.index-list:after {
+	display: block;
+	content: "";
+	clear: both;
+}
+.index-item {
+	float: left;
+	width: 14px;
+	height: 14px;
+}
+
+.index-item ~ .index-item {
+	margin-left: 11px;
+}
+.btn-index-number {
+	padding: 0;
+	width: 10px;
+	height: 10px;
+	background-color: #c6c6c6;
+	border-radius: 50%;
+}
+.btn-index-number span {
+	font-size: 0;
+	line-height: 0;
+	color: transparent;
+}
+.index-item.is-active {
+	margin-right: 2px;
+}
+.index-item.is-active .btn-index-number {
+	width: 14px;
+	height: 14px;
+	border: 2px solid #727272;
+	background: none;
 }
