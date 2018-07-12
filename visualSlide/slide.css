@@ -1,0 +1,55 @@
+body,html{padding:0;height:100%;font-size:12px;letter-spacing:-1px;font:normal normal 12px/1.5 dotum,"돋움",gulim,arial;color:#48494f}
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,input,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0}
+button,input,select,textarea{font-size:12px;color:#666;font-family:dotum,sans-serif}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+fieldset,img{border:0}
+table{border-collapse:collapse;border-spacing:0;width:100%;table-layout:fixed}
+dd,dl,dt,li,ol,ul{list-style:none}
+address,dfn,em,var{font-style:normal}
+.blind,legend{display:block;overflow:hidden;position:absolute;top:-1000em;left:0;font-size:0;line-height:0;text-indent:-1000em}
+caption,hr{display:none!important}
+a:active,a:link,a:visited{color:#666;text-decoration:none}
+a:hover{color:#666;cursor:pointer}
+label{cursor:pointer}
+img,input,label{vertical-align:top;*vertical-align:middle}
+button{cursor:pointer;background:0 0;display:inline-block;margin:0 -5px;border:0;vertical-align:top;*vertical-align:-1px;overflow:visible}
+button::-moz-focus-inner{border:0;padding:0}
+button *{position:relative}
+
+.dialog-guide {
+	width: 978px;
+	border: 1px solid #000;
+	background-color: #f8f8f8;
+}
+.guide-slide-wrap {
+	position: relative;
+	margin: 35px 20px 20px;
+}
+.guide-slide-block {
+	width: 848px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.guide-slide-list {
+	width: 3392px;
+}
+.guide-slide-item {
+	float: left;
+	width: 846px;
+	height: 397px;
+	border: 1px solid #ccc;
+	background-color: #fff; 
+}
+.btn-slider {
+	position: absolute;
+	margin-top: -25px;
+	top: 50%;
+	width: 27px;
+	height: 54px;
+}
+.btn-slider-prev {
+	left: 0;
+}
+.btn-slider-next {
+	right: 0;
+}
