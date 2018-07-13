@@ -92,6 +92,7 @@ button::-moz-focus-inner{border:0;padding:0}
 	float: left;
 	width: 14px;
 	height: 14px;
+	text-align: center;
 }
 
 .index-item ~ .index-item {
