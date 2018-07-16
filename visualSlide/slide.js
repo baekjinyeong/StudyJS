@@ -6,17 +6,17 @@ function slide(){
 
 	var guideList = $('.guide-slide-list'),
 			guideItem = guideList.find('.guide-slide-item'),
-			guideLength = guideItem.length -1,
+			guideLength = guideItem.length,
 			guideWidth = guideItem.outerWidth(),
 			count = 0;
 
-	$(document).on('click','.btn-slider-prev', function(e){
-		e.preventDefault();
+	guideList.css('width', guideWidth * guideLength)
+
+	$(document).on('click','.btn-slider-prev', function(){
 		direction('prev');
 	});
 
-	$(document).on('click','.btn-slider-next', function(e){
-		e.preventDefault();
+	$(document).on('click','.btn-slider-next', function(){
 		direction('next');
 	});
 
@@ -37,8 +37,8 @@ function slide(){
 	function direction(action){
 		if(action == 'next') {
 			count++;
-			if(count >= guideLength) {
-				count = guideLength;
+			if(count >= guideLength-1) {
+				count = guideLength-1;
 			}
 
 		} else if (action == 'prev') {
