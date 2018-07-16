@@ -8,13 +8,18 @@ dd,dl,dt,li,ol,ul{list-style:none}
 address,dfn,em,var{font-style:normal}
 .blind,legend{display:block;overflow:hidden;position:absolute;top:-1000em;left:0;font-size:0;line-height:0;text-indent:-1000em}
 caption,hr{display:none!important}
-a:active,a:link,a:visited{color:#666;text-decoration:none}
-a:hover{color:#666;cursor:pointer}
+a:active,a:link,a:visited{text-decoration:none}
+a:hover{cursor:pointer}
 label{cursor:pointer}
 img,input,label{vertical-align:top;*vertical-align:middle}
 button{cursor:pointer;background:0 0;display:inline-block;border:0;overflow:visible}
 button::-moz-focus-inner{border:0;padding:0}
 
+.sprite span {
+	font-size: 0;
+	line-height: 0;
+	color: transparent;
+}
 .dialog-guide {
 	width: 978px;
 	border: 1px solid #000;
@@ -73,49 +78,67 @@ button::-moz-focus-inner{border:0;padding:0}
 	top: 50%;
 	width: 27px;
 	height: 54px;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+.btn-guide-group {
+	margin-top: 20px;
+	text-align: center;
+}
+.btn-move {
+	display: inline-block;
+	padding: 0 25px;
+	height: 31px;
+	background-color: #d8578d;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	line-height: 31px;
+}
+.btn-move ~ .btn-move {
+	margin-left: 7px;
 }
 .btn-slider-prev {
 	left: 0;
+	background-image: url('btn_slide_prev.png');
 }
 .btn-slider-next {
 	right: 0;
+	background-image: url('btn_slide_next.png');
 }
-.index-list {
-	margin-top: 20px;
+.data-slides-group {
+	margin-top: 17px;
+	text-align: center;
 }
-.index-list:after {
+.data-slides-group:after {
 	display: block;
 	content: "";
 	clear: both;
 }
-.index-item {
-	float: left;
-	width: 14px;
+.data-slides-item {
+	display: inline-block;
+	width: 24px;
 	height: 14px;
-	text-align: center;
 }
-
-.index-item ~ .index-item {
-	margin-left: 11px;
-}
-.btn-index-number {
+.btn-data-slides {
 	padding: 0;
 	width: 10px;
 	height: 10px;
 	background-color: #c6c6c6;
 	border-radius: 50%;
 }
-.btn-index-number span {
-	font-size: 0;
-	line-height: 0;
-	color: transparent;
-}
-.index-item.is-active {
-	margin-right: 2px;
-}
-.index-item.is-active .btn-index-number {
+.data-slides-item.is-active .btn-data-slides {
 	width: 14px;
 	height: 14px;
 	border: 2px solid #727272;
 	background: none;
+}
+.dialog-guide-check {
+	position: absolute;
+	bottom: 4px;
+	right: 45px;
+	font-size: 11px;
+}
+.dialog-guide-check input[type="checkbox"] {
+	vertical-align: middle;
 }
