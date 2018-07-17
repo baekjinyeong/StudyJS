@@ -10,22 +10,23 @@ function slide(){
 			guideWidth = guideItem.outerWidth(),
 			count = 0;
 
-	guideList.css('width', guideWidth * guideLength)
-
+	guideList.css('width', guideWidth * guideLength);
+	
 	function direction(action){
 		if(action == 'next') {
 			count++;
-			if(count >= guideLength-1) {
-				count = guideLength-1;
-			}
-
+			moveNext();
 		} else if (action == 'prev') {
 			count--;
-			if(count <= 0) {
-				count = 0;
+			if(count < 0) {
+				count = guideLength-1;
+				// $(this).children("li.guide-slide-item:first").insertAfter($(this).children("li.guide-slide-item:last"));
+				// $(guideList).css({
+				// 	'margin-left' : 0
+				// });
 			}
 		}
-		move();
+		currentPage();
 	};
 
 	function control(event){
@@ -42,17 +43,31 @@ function slide(){
 	}
 
 	function move(){
-		guideList.stop().animate({
-			'margin-left': count * (-guideWidth) + 'px'
-		},300);
-		currentPage();
+		// guideList.stop().animate({
+		// 	'margin-left': count * (-guideWidth) + 'px'
+		// },300);
+		// currentPage();
 	}
 
-	function currentPage(){
-		var pageIdx = guideItem.eq(count).index();
-		$('.btn-data-slides').closest('.data-slides-item').eq(pageIdx).addClass('is-active').siblings().removeClass('is-active');
+	function moveNext(){
+		guideList.stop().animate({
+			'margin-left': count * (-guideWidth) + 'px'
+		},300, function(){
+			if(count >= guideLength) {
+				count = 0;
+				$(".guide-slide-list > li.guide-slide-item:last").insertBefore($(".guide-slide-list > li.guide-slide-item:first"));
+				guideList.css({
+					'margin-left' : guideWidth * -1
+				});
+			}
+		});
+	}
 
-		console.log(pageIdx,count);
+	function movePrev(){}
+
+	function currentPage(){
+		$('.btn-data-slides').closest('.data-slides-item').eq(count).addClass('is-active').siblings().removeClass('is-active');
+		console.log(count,guideLength);
 	}
 
 	$(document).on('click','.btn-slider-prev', function(){
@@ -63,11 +78,10 @@ function slide(){
 		direction('next');
 	});
 
-	$(document).on('click', '.btn-data-slides', function(e){
-		e.preventDefault();
+	$(document).on('click','.btn-data-slides', function(event){
+		event.preventDefault();
 		control(event);
 	});
-	
 };
 slide();
 
