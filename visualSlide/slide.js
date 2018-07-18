@@ -10,22 +10,23 @@ function slide(){
 			guideWidth = guideItem.outerWidth(),
 			count = 0;
 
-	guideList.css('width', guideWidth * guideLength)
+	guideList.css('width', guideWidth * guideLength);
 
 	function direction(action){
 		if(action == 'next') {
+			moveNext();
 			count++;
-			if(count >= guideLength-1) {
-				count = guideLength-1;
-			}
-
-		} else if (action == 'prev') {
-			count--;
-			if(count <= 0) {
+			if(count >= guideLength) {
 				count = 0;
 			}
+		} else if (action == 'prev') {
+			movePrev();
+			count--;
+			if(count < 0) {
+				count = guideLength-1;
+			}
 		}
-		move();
+		currentPage();
 	};
 
 	function control(event){
@@ -37,22 +38,28 @@ function slide(){
 		$(current).addClass('is-active').siblings().removeClass('is-active');
 
 		guideList.stop().animate({
-			'margin-left' : $(current).index() * -guideWidth
+			'left' : $(current).index() * -guideWidth
 		},300);
 	}
 
-	function move(){
-		guideList.stop().animate({
-			'margin-left': count * (-guideWidth) + 'px'
-		},300);
-		currentPage();
+	function moveNext(){
+		var firstChild = guideList.children('li.guide-slide-item:first-child').clone();
+		firstChild.appendTo(guideList);
+		guideList.children('li.guide-slide-item:first-child').remove();
+		guideList.css('left',0);
+		guideList.stop().animate({'left': -guideWidth + 'px'},300);
+	}
+
+	function movePrev(){
+		var lastChild = guideList.children('li.guide-slide-item:last-child').clone();
+		lastChild.prependTo(guideList);
+		guideList.css('left', -guideWidth + 'px');
+		guideList.children('li.guide-slide-item:last-child').remove();
+		guideList.stop().animate({'left': 0},300);
 	}
 
 	function currentPage(){
-		var pageIdx = guideItem.eq(count).index();
-		$('.btn-data-slides').closest('.data-slides-item').eq(pageIdx).addClass('is-active').siblings().removeClass('is-active');
-
-		console.log(pageIdx,count);
+		$('.btn-data-slides').closest('.data-slides-item').eq(count).addClass('is-active').siblings().removeClass('is-active');
 	}
 
 	$(document).on('click','.btn-slider-prev', function(){

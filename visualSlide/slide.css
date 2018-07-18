@@ -31,9 +31,16 @@ button::-moz-focus-inner{border:0;padding:0}
 	margin: 35px 20px 18px;
 }
 .guide-slide-block {
+	position: relative;
 	width: 850px;
+	height: 590px;
 	margin: 0 auto;
 	overflow: hidden;
+}
+.guide-slide-list {
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 .guide-slide-list:after {
 	display: block;
@@ -64,7 +71,7 @@ button::-moz-focus-inner{border:0;padding:0}
 	margin-top: 77px;
 }
 .guide-image3 {
-	margin-top: 55px;
+	margin-top: 56px;
 }
 .guide-image4 {
 	margin-top: 26px;
