@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* reset */
+html, body { margin: 0 ; padding: 0;}
+body{font:normal normal 12px/1.5 dotum,"돋움",gulim,arial;color:#48494f}
+ol, ul, li, dl, dt, dd, blockquote, fieldset, h1, h2, h3, h4, h4, h5, h6, pre, form, p {margin:0;padding:0;font-family:dotum}
+address, caption, cite, code, dfn, em, strong, textarea, var{font-style:normal;font-weight:normal}
+b, strong{font-weight:bold}
+a{text-decoration:none;color:#000;border:0}
+a:hover{text-decoration:underline}
+ol, ul{list-style:none}
+img{border:0}
+fieldset{border:0}
+legend{display:none;margin-left:-7px}
+table{table-layout:fixed;border-collapse:collapse;border-spacing:0}
+table td{word-wrap:break-word}
+input{font:normal normal 12px/1.5 dotum, gulim, arial;color:#666}
+textarea{font:normal normal 11px/1.5 dotum;color:#48494f;resize:none}
+a, input{outline:none}
+caption{visibility:hidden;margin:0;padding:0;width:0;height:0;font-size:0;line-height:0}
+hr,legend,.blind{overflow:hidden;position:absolute;top:0;left:0;width:0;height:0;font-size:0;line-height:0}
+button {padding: 0;background: none;border: 0 none;border-radius: 0;vertical-align: middle;font-family: "돋움", dotum,arial,sans-serif;cursor: pointer;white-space: nowrap;overflow: visible;} /* [WPRT-1072] */
+button::-moz-focus-inner {border: 0;padding: 0;} 
+.button {display: inline-block;position: relative;vertical-align: top;}
+.button span {position: absolute;top: 0;left: 0;width: 100%;height: 100%;color: transparent;font-size: 0;line-height: 0;cursor: pointer;}
+
+.warehousein_date {width:880px;}
+.warehousein_date .calendar_tabs {position: relative;background: #91959c url("bg_calendar_tabs.gif") repeat-x 0 0;}
+.warehousein_date .calendar_tabs_inner {width: 800px;margin: 0 auto;overflow: hidden;}
+.warehousein_date .tabs_nav {overflow: hidden;}
+.warehousein_date .tabs_nav_item {float: left;display: table;width: 160px;text-align: center;}
+.warehousein_date .tabs_nav_item ~ .tabs_nav_item {margin-left: -1px;}
+.warehousein_date .tabs_nav_item a {display: table-cell;*display: block;height: 36px;padding: 6px 0 5px;color: #ececed;background-color: #91959c;border-top: 1px solid #7a7c81;border-right: 1px solid #808389;border-bottom: 1px solid #7a7c81;border-left: 1px solid #808389;line-height: 18px;font-weight: bold;text-decoration: none;vertical-align: middle;}
+.warehousein_date .tabs_nav_item.is_selected a {position: relative;color: #fff;background-color: #ff7410;border-color: #e16007;}
+.warehousein_date .tabs_nav_item .selected_date {display: block;}
+.warehousein_date .tabs_control {position: absolute;top: 0;width: 32px;height: 36px;padding: 11px 0 0 7px;background-color: #91959c;border-top: 1px solid #7a7c81;border-bottom: 1px solid #7a7c81;}
+.warehousein_date .tabs_control .button {width: 25px;height: 25px;opacity: .5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter: alpha(opacity=50);}
+.warehousein_date .tabs_control .button span {background: url("btn_calendar_tabs.gif") no-repeat 0 0;}
+.warehousein_date .tabs_control.is_active .button {opacity: 1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter: alpha(opacity=100);}
+.warehousein_date .tabs_prev {left: 0;border-left: 1px solid #7a7c81;}
+.warehousein_date .tabs_next {right: 0;border-right: 1px solid #7a7c81;}
+.warehousein_date .tabs_next .button span {background-position-y: -25px;}
